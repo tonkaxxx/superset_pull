@@ -1,6 +1,6 @@
 ---
 - name: sync with gitHub repository
-  hosts: serverb-ubuntu
+  hosts: all # change hosts if needed
   become: yes
   vars:
     repo_url: "https://github.com/apache/superset.git"

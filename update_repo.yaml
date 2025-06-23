@@ -1,0 +1,27 @@
+---
+- name: sync with gitHub repository
+  hosts: serverb-ubuntu
+  become: yes
+  vars:
+    repo_url: "https://github.com/apache/superset.git"
+    repo_path: "/root/ansible/superset"
+    repo_branch: "master"
+
+  tasks:
+    - name: install git
+      apt:
+        name: git
+
+    - name: check if repo exists
+      stat:
+        path: ~/ansible/superset/.git
+      register: repo_stat
+
+    - name: clone or update repository
+      ansible.builtin.git:
+        repo: "{{ repo_url }}"
+        dest: "{{ repo_path }}"
+        version: "{{ repo_branch }}"
+        update: yes
+        # force: yes
+      register: git_result

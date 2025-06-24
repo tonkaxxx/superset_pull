@@ -9,7 +9,7 @@
 
   tasks:
     - name: install git
-      apt:
+      apt: # change packet manager if needed
         name: git
 
     - name: check if repo exists
